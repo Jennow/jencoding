@@ -1,0 +1,12 @@
+title=JENCODING
+subtitle=Web Entwickling
+work=Arbeiten
+work_p=Hier können Sie ein wenig durch meine bisherigen Arbeiten stöbern. Viel Spaß.
+about=Über mich
+about_p=Herzlich Willkommen auf jencoding.com. Dies ist meine persönliche Online Präsenz. <br>Mein Name ist Jenifer Prochnow und ich bin Software Entwicklerin mit Hauptfokus auf den Bereich Web Entwicklung. <br>
+contact=Kontakt
+contact_name=Name
+contact_email=email
+contact_message=Nachricht
+contact_send_message=Abschicken
+contact_reset=Zurücksetzen
