@@ -4,8 +4,9 @@ php files and translating strings dynamically.
 Credits:
 	Template:
         html5up.net/license
-	Demo Images:
+	Images:
 		Unsplash (unsplash.com)
+		Taken by myself (Jenifer Prochnow)
 
 	Icons:
 		Font Awesome (fontawesome.io)
