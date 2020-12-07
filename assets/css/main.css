@@ -831,16 +831,16 @@ button {
     width: var(--btn-size);
     height: var(--btn-size);
     position: absolute;
-    top: 50%;
+    top: 25%;
     transform: translateY(-50%);
     z-index: 100;
     border: none;
     text-align: center;
     cursor: pointer; }
     .card-list-btn.btn-left {
-      left: -10%; }
+      left: 0%; }
     .card-list-btn.btn-right {
-      right: -10%; }
+      right: 0%; }
     .card-list-btn i {
       font-size: 2rem; }
   .card-list .cards-wrapper {
