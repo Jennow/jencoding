@@ -298,11 +298,7 @@
 						.appendTo($this)
 						.on('click', function() {
 						    if(projectIds.includes($this.attr('id'))) {
-                                window.location.hash = "#work";
-                                $('article').hide();
-                                $('article').removeClass('work');
-                                $('#info').show();
-                                $('#info').addClass('work');
+                                showArticle('work')
                             } else {
                                 location.hash = '';
                             }
@@ -409,3 +405,10 @@
 					});
 
 })(jQuery);
+
+function showArticle(articleId) {
+    $('article').hide();
+    $('article').removeClass('active');
+    $('#' + articleId).show();
+    $('#' + articleId).addClass('active');
+}

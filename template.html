@@ -95,10 +95,7 @@
     function showInfo(title, message) {
         $('#info .info-title').html(title);
         $('#info .info-p').html(message);
-        $('article').hide();
-        $('article').removeClass('active');
-        $('#info').show();
-        $('#info').addClass('active');
+        showArticle('info')
     }
 
 </script>
