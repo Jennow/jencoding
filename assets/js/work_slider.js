@@ -23,7 +23,7 @@ function swapCards(direction) {
         currentCart.classList.remove("current-card");
         previousCard.classList.remove("previous-card");
         nextCard.classList.remove("next-card");
-        currentCart.style.zIndex = "50";
+        currentCart.style.zIndex = "20";
         if (direction === "right") {
             previousCard.style.zIndex = "20";
             nextCard.style.zIndex = "30";

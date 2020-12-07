@@ -2,31 +2,34 @@
   {
     "identifier"   : "bluerizon",
     "name" : "blue-rizon",
-    "logo" : "",
+    "logo" : "blue_rizon.svg",
     "url"  : "",
-    "description_en" : "",
-    "description_de" : "",
+    "description_en" : "Wordpress Fashion Store",
+    "description_de" : "Wordpress Fashion Store",
     "youtube" : "",
     "github" : ""
   }, {
     "identifier"   : "puzzl3d",
     "name" : "Puzzl3D",
-    "description_en" : "",
-    "description_de" : "",
+    "logo" : "puzzle.png",
+    "description_en" : "Augmented Reality 3D Puzzle",
+    "description_de" : "Augmented Reality 3D Puzzle",
     "youtube" : "https://www.youtube.com/embed/P2umz5qVCTo",
     "github" : ""
   }, {
     "identifier"   : "blackout",
     "name" : "Blackout",
-    "description_en" : "",
-    "description_de" : "",
+    "logo" : "blackout_logo.svg",
+    "description_en" : "2D Side Scroller with Unity3D",
+    "description_de" : "2D Side Scroller mit Unity3D",
     "youtube" : "https://www.youtube.com/embed/AmMQ5QKA19o>",
     "github" : ""
   }, {
     "identifier"   : "vart",
     "name" : "V-Art",
-    "description_en" : "",
-    "description_de" : "",
+    "logo" : "v-art_logo.png",
+    "description_en" : "Virtual Reality Connect-The-Dots Game",
+    "description_de" : "Virtual Reality Verbinde-Die-Punkte Spiel",
     "youtube" : "https://www.youtube.com/embed/P2umz5qVCTo",
     "github" : ""
   }
