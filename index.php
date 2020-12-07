@@ -3,12 +3,13 @@
 include_once 'Translator.php';
 include_once 'TemplateParser.php';
 
-
 $parser = new TemplateParser('template.html');
+$parser->setVariable('rootUrl', 'http://localhost/jencoding');
+$parser->setVariable('contactMail', 'jeniferprochnow@web.de');
+
 echo $parser->parseTemplate();
 
 
-// TODO: Add functionality to Contact Form
 // TODO: Add Projects
-// TODO: Translations
-// TODO: Language Switch Button
+// TODO: Add own contentpage for each project
+// TODO: Make slider dynamic to have mor than 3 projects

@@ -1,6 +1,71 @@
 <!-- Work -->
 <article id="work">
   <h2 class="major">{{t:"work"}}</h2>
-  <span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+<!--  <span class="image main"><img src="images/pic02.jpg" alt="" /></span>-->
   <p>{{t:"work_p"}}</p>
+
+    <div class="card-list">
+      <a class="card-list-btn btn btn-left">
+        <div class="icon">
+          <i class="fas fa-angle-left"></i>
+        </div>
+      </a>
+
+      <div class="cards-wrapper">
+        <div class="card current-card">
+          <div class="card-image" style="background-image: url('{{rootUrl}}/images/blue_rizon.svg')"></div>
+        </div>
+
+        <div class="card next-card">
+          <div class="card-image" style="background-image: url('{{rootUrl}}/images/v-art_logo.png')"></div>
+        </div>
+
+        <div class="card previous-card">
+          <div class="card-image" style="background-image: url('{{rootUrl}}/images/blackout_logo.svg')"></div>
+        </div>
+      </div>
+
+      <a class="card-list-btn btn btn-right">
+        <div class="icon">
+          <i class="fas fa-angle-right"></i>
+        </div>
+      </a>
+    </div>
+
+    <div class="info-list">
+      <div class="info-wrapper">
+        <div class="info current-info">
+          <h2 class="text name">blue-rizon</h2>
+          <p class="text description">Wordpress Fashion Store</p>
+          <button class="text" onclick="alert('hi')">more</button>
+        </div>
+
+        <div class="info next-info">
+          <h2 class="text name">Blackout</h2>
+          <p class="text description">2D Side Scroller with Unity3D</p>
+          <button class="text" onclick="alert('hi')">more</button>
+
+        </div>
+
+<!--        <div class="info previous-info">-->
+<!--          <h1 class="text name">Puzzl3D</h1>-->
+<!--          <p class="text description">Augmented Reality 3D Puzzle</p>-->
+<!--        </div>-->
+        <div class="info previous-info">
+          <h2 class="text name">V-Art</h2>
+          <p class="text description">Virtual Reality Connect-The-Dots Game</p>
+          <button class="text" onclick="alert('hi')">more</button>
+
+        </div>
+      </div>
+    </div>
+
+  <div class="loading-wrapper">
+    <div class="loader-text">Loading...</div>
+    <div class="loader">
+      <span></span>
+    </div>
+  </div>
+
+
 </article>

@@ -4,29 +4,45 @@
 class TemplateParser {
 
     private $content = '';
+    private $lang = '';
+    private $variables = [];
 
     public function __construct($templateFile) {
-        $this->content = file_get_contents($templateFile);
+        $this->content     = file_get_contents($templateFile);
+        $lang              = $_GET['lang'];
+        $acceptLang        = ['de', 'en'];
+        $this->lang        = in_array($lang, $acceptLang) ? $lang : 'en';
+        $langSwitch        = array_values(array_diff($acceptLang, [$this->lang]))[0] ?: 'de';
+        $this->setVariable('langswitch', $langSwitch);
     }
 
     public function parseTemplate() {
         $this->includeFiles();
         $this->loadTranslations();
+        $this->passVariables();
 
         return $this->content;
     }
 
-
     private function loadTranslations() {
-        $lang       = $_GET['lang'];
-        $acceptLang = ['de', 'en'];
-        $lang       = in_array($lang, $acceptLang) ? $lang : 'en';
-
-        $translator   = new Translator($lang);
+        $translator   = new Translator($this->lang);
         $translations = $translator->getTranslations();
-
         foreach ($translations as $key => $translation) {
             $this->content = preg_replace('/{{t:"' . $key . '"}}/', $translation, $this->content);
+        }
+    }
+
+    public function setVariable($key, $value) {
+        $this->variables[$key] = $value;
+    }
+
+    public function setVariables($array) {
+        $this->variables = array_merge($this->variables, $array);
+    }
+
+    private function passVariables() {
+        foreach ($this->variables as $key => $value) {
+            $this->content = preg_replace('/{{' . $key . '}}/', $value, $this->content);
         }
     }
 

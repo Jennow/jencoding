@@ -1,15 +1,11 @@
 <!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 <head>
-  <title>Dimension by HTML5 UP</title>
+  <title>jencoding</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 <body class="is-preload">
@@ -44,6 +40,7 @@
     <!-- INCLUDE inc_about.html -->
     <!-- INCLUDE inc_contact.html -->
     <!-- INCLUDE inc_elements.html -->
+    <!-- INCLUDE inc_info.html -->
   </div>
 
   <!-- Footer -->
@@ -53,11 +50,11 @@
       <li><a target="_blank" href="https://www.youtube.com/channel/UCOnwaAMFxAxzHH2_QeeWUPQ" class="icon brands fa-youtube"><span class="label">Instagram</span></a></li>
       <li><a target="_blank" href="https://www.instagram.com/jenp_shots/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
       <li><a target="_blank" href="https://github.com/Jennow" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+      <li><a href="{{rootUrl}}/{{langswitch}}" class="icon brands language-switch">{{langswitch}}</a></li>
     </ul>
-    <p class="copyright">&copy; Jencoding. Design Template: <a href="https://html5up.net">HTML5 UP</a>.</p>
+    <p class="copyright">&copy; Jencoding. Design Template: <a target="_blank" href="https://html5up.net">HTML5 UP</a>.</p>
 <!--    <p class="copyright">&copy; Jencoding</p>-->
   </footer>
-
 </div>
 
 <!-- BG -->
@@ -69,6 +66,41 @@
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.3/gsap.min.js"></script>
+<script src="assets/js/work_slider.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#contact form').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "contact_form.php",
+                context: document.body
+            }).done(function(response) {
+                response = JSON.parse(response);
+                if (response.success) {
+                    showInfo('{{t:"mail_success_title"}}', '{{t:"mail_success_p"}}');
+                } else {
+                    showInfo('{{t:"mail_error_title"}}', '{{t:"mail_error_p"}}');
+                }
+                console.log(response);
+            });
+        })
+    });
+
+
+    function showInfo(title, message) {
+        $('#info .info-title').html(title);
+        $('#info .info-p').html(message);
+        $('article').hide();
+        $('article').removeClass('active');
+        $('#info').show();
+        $('#info').addClass('active');
+    }
+
+</script>
 
 </body>
 </html>

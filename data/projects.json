@@ -1,0 +1,33 @@
+[
+  {
+    "identifier"   : "bluerizon",
+    "name" : "blue-rizon",
+    "logo" : "",
+    "url"  : "",
+    "description_en" : "",
+    "description_de" : "",
+    "youtube" : "",
+    "github" : ""
+  }, {
+    "identifier"   : "puzzl3d",
+    "name" : "Puzzl3D",
+    "description_en" : "",
+    "description_de" : "",
+    "youtube" : "https://www.youtube.com/embed/P2umz5qVCTo",
+    "github" : ""
+  }, {
+    "identifier"   : "blackout",
+    "name" : "Blackout",
+    "description_en" : "",
+    "description_de" : "",
+    "youtube" : "https://www.youtube.com/embed/AmMQ5QKA19o>",
+    "github" : ""
+  }, {
+    "identifier"   : "vart",
+    "name" : "V-Art",
+    "description_en" : "",
+    "description_de" : "",
+    "youtube" : "https://www.youtube.com/embed/P2umz5qVCTo",
+    "github" : ""
+  }
+]
