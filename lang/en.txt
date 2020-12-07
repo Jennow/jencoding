@@ -43,3 +43,4 @@ mail_success_title=Message sent
 mail_success_p=Thank you, your message was sent successfully. I will respond as soon as possible.
 mail_error_title=An error occured
 mail_error_p=Please send your message directly to jeniferprochnow@web.de.
+more=More infos
