@@ -9,7 +9,7 @@ const cardInfosContainer = document.querySelector(".info-wrapper");
 var page                 = 0;
 
 $.ajax({
-   url: ROOT_URL + '/data/projects.json',
+   url: '/data/projects.json',
    success: function(data) {
        let dataSize = data.length;
 
