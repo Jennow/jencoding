@@ -75,8 +75,75 @@
 		var	delay = 325,
 			locked = false;
 
+
+    $main._show = function (id, initial) {
+        var $article = $main_articles.filter('#' + id);
+
+        // No such article? Try including file.
+        if ($article.length == 0) {
+            $.ajax({
+                data: {"template": id, "ajax":true},
+                success: function (response) {
+                    $('#main').append(response);
+                    if (id === 'work') {
+                            $main._refreshMain();
+                    } else {
+                        $main._refreshMain();
+                    }
+
+                    if ($main_articles.filter(location.hash).length > 0) {
+                        $main._showAfterLoadingTemplate(id, initial);
+                    }
+                }
+            })
+        } else {
+            $main._showAfterLoadingTemplate(id, initial);
+        }
+    }
+
+    $main._refreshMain = function() {
+        let workWidgetLoaded = $main_articles.find('#work').prevObject.length == 1;
+        $main_articles       = $main.children('article');
+
+        // Articles.
+        $main_articles.each(function() {
+
+            var $this = $(this);
+
+            if($this.find('.cloase').length == 0) {
+                // Close.
+                $('<div class="close">Close</div>')
+                    .appendTo($this)
+                    .on('click', function() {
+                        if(projectIds.includes($this.attr('id'))) {
+                            showArticle('work')
+                        }
+                        else {
+                            location.hash = '';
+                        }
+                    });
+            }
+
+            if ($this.attr('id') === 'work' && !workWidgetLoaded) {
+                $.getScript("assets/js/work_slider.js", function () {
+                }).fail(function(){
+                    if(arguments[0].readyState==0){} else {
+                        console.error(arguments[2].toString());
+                    }
+                });
+            }
+
+            // Prevent clicks from inside article from bubbling.
+            $this.on('click', function(event) {
+                event.stopPropagation();
+            });
+
+        });
+    }
+
+
 		// Methods.
-			$main._show = function(id, initial) {
+			$main._showAfterLoadingTemplate = function(id, initial) {
 
 				var $article = $main_articles.filter('#' + id);
 
@@ -292,28 +359,6 @@
 
 			};
 
-		// Articles.
-			$main_articles.each(function() {
-
-				var $this = $(this);
-				// Close.
-					$('<div class="close">Close</div>')
-						.appendTo($this)
-						.on('click', function() {
-						    if(projectIds.includes($this.attr('id'))) {
-                                showArticle('work')
-                            } else {
-                                location.hash = '';
-                            }
-                        });
-
-				// Prevent clicks from inside article from bubbling.
-					$this.on('click', function(event) {
-						event.stopPropagation();
-					});
-
-			});
-
 		// Events.
 			$body.on('click', function(event) {
 
@@ -343,9 +388,8 @@
 			});
 
 			$window.on('hashchange', function(event) {
-
 				// Empty hash?
-					if (location.hash == ''
+	                if (location.hash == ''
 					||	location.hash == '#') {
 
 						// Prevent default.
@@ -357,9 +401,8 @@
 
 					}
 
-				// Otherwise, check for a matching article.
-					else if ($main_articles.filter(location.hash).length > 0) {
-
+                // Otherwise, check for a matching article.
+					else {
 						// Prevent default.
 							event.preventDefault();
 							event.stopPropagation();

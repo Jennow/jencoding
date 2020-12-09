@@ -1,40 +1,38 @@
 const { gsap, imagesLoaded } = window;
-
 const buttons = {
     prev: document.querySelector(".btn-left"),
     next: document.querySelector(".btn-right"),
 };
-const cardsContainer = document.querySelector(".cards-wrapper");
+
+const cardsContainer     = document.querySelector(".cards-wrapper");
 const cardInfosContainer = document.querySelector(".info-wrapper");
-var page = 0;
+var page                 = 0;
 
-$(document).ready(function() {
-   $.ajax({
-       url: ROOT_URL + '/data/projects.json',
-       success: function(data) {
-           console.log(data)
-           let dataSize = data.length;
+$.ajax({
+   url: ROOT_URL + '/data/projects.json',
+   success: function(data) {
+       let dataSize = data.length;
 
-           loadCards(0, data)
-           buttons.next.addEventListener("click", function () {
-               loadCards(page, data);
-               page++;
-               if (page > dataSize - 1) {
-                   page = 0;
-               }
-               swapCards("right")
-           });
-           buttons.prev.addEventListener("click", function (){
-               loadCards(page, data);
-               page--;
-               if (page < 0) {
-                   page = dataSize - 1;
-               }
-               swapCards("left")
-           });
-       }
-   })
+       loadCards(0, data);
+       buttons.next.addEventListener("click", function () {
+           loadCards(page, data);
+           page++;
+           if (page > dataSize - 1) {
+               page = 0;
+           }
+           swapCards("right")
+       });
+       buttons.prev.addEventListener("click", function (){
+           loadCards(page, data);
+           page--;
+           if (page < 0) {
+               page = dataSize - 1;
+           }
+           swapCards("left")
+       });
+   }
 });
+
 
 function loadCards(cardId, data, direction) {
     let dataSize = data.length;
@@ -76,8 +74,6 @@ function loadCards(cardId, data, direction) {
         $('.next-info .description').html(next.description_en);
         $('.current-info .description').html(current.description_en);
     }
-
-
 }
 
 
@@ -248,11 +244,7 @@ function init() {
         );
 }
 
-const waitForImages = () => {
-    const images = [...document.querySelectorAll("img")];
-    const totalImages = images.length;
-    let loadedImages = 0;
-    const loaderEl = document.querySelector(".loader span");
+const loadSlider = () => {
 
     gsap.set(cardsContainer.children, {
         "--card-translateY-offset": "100vh",
@@ -266,30 +258,14 @@ const waitForImages = () => {
         opacity: "0",
     });
 
-    images.forEach((image) => {
-        imagesLoaded(image, (instance) => {
-            if (instance.isComplete) {
-                loadedImages++;
-                let loadProgress = loadedImages / totalImages;
+    gsap.timeline()
+        .to(".loading-wrapper", {
+            duration: 0.8,
+            opacity: 0,
+            pointerEvents: "none",
+        })
+        .call(() => init());
 
-                gsap.to(loaderEl, {
-                    duration: 1,
-                    scaleX: loadProgress,
-                    backgroundColor: `hsl(${loadProgress * 120}, 100%, 50%`,
-                });
-
-                if (totalImages == loadedImages) {
-                    gsap.timeline()
-                        .to(".loading-wrapper", {
-                            duration: 0.8,
-                            opacity: 0,
-                            pointerEvents: "none",
-                        })
-                        .call(() => init());
-                }
-            }
-        });
-    });
 };
 
-waitForImages();
+loadSlider();
