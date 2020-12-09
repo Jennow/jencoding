@@ -11,7 +11,7 @@
   }, {
     "identifier"   : "puzzl3d",
     "name" : "Puzzl3D",
-    "logo" : "puzzle.png",
+    "logo" : "puzzle.webp",
     "description_en" : "Augmented Reality 3D Puzzle",
     "description_de" : "Augmented Reality 3D Puzzle",
     "youtube" : "https://www.youtube.com/embed/P2umz5qVCTo",
@@ -27,7 +27,7 @@
   }, {
     "identifier"   : "vart",
     "name" : "V-Art",
-    "logo" : "v-art_logo.png",
+    "logo" : "v-art_logo.webp",
     "description_en" : "Virtual Reality Connect-The-Dots Game",
     "description_de" : "Virtual Reality Verbinde-Die-Punkte Spiel",
     "youtube" : "https://www.youtube.com/embed/P2umz5qVCTo",

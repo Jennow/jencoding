@@ -3,6 +3,16 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+const projectIds = [
+    'bluerizon',
+    'blackout',
+    'puzzl3d',
+    'vart'
+];
+
+var workWidgetLoaded = false;
+
+var showArticle;
 
 (function($) {
 
@@ -12,13 +22,7 @@
 		$header = $('#header'),
 		$footer = $('#footer'),
 		$main = $('#main'),
-		$main_articles = $main.children('article'),
-        projectIds = [
-            'blue_rizon',
-            'blackout',
-            'puzzl3d',
-            'vart'
-        ]
+		$main_articles = $main.children('article');
 
 	// Breakpoints.
 		breakpoints({
@@ -85,11 +89,7 @@
                 data: {"template": id, "ajax":true},
                 success: function (response) {
                     $('#main').append(response);
-                    if (id === 'work') {
-                            $main._refreshMain();
-                    } else {
-                        $main._refreshMain();
-                    }
+                    $main._refreshMain();
 
                     if ($main_articles.filter(location.hash).length > 0) {
                         $main._showAfterLoadingTemplate(id, initial);
@@ -102,15 +102,19 @@
     }
 
     $main._refreshMain = function() {
-        let workWidgetLoaded = $main_articles.find('#work').prevObject.length == 1;
+        if (!workWidgetLoaded) {
+            workWidgetLoaded = $main_articles.find('#work').prevObject.length === 1;
+        }
         $main_articles       = $main.children('article');
+        // console.log($main_articles);
+        // alert(workWidgetLoaded)
 
         // Articles.
         $main_articles.each(function() {
 
             var $this = $(this);
 
-            if($this.find('.cloase').length == 0) {
+            if($this.find('.close').length === 0) {
                 // Close.
                 $('<div class="close">Close</div>')
                     .appendTo($this)
@@ -127,7 +131,7 @@
             if ($this.attr('id') === 'work' && !workWidgetLoaded) {
                 $.getScript("assets/js/work_slider.js", function () {
                 }).fail(function(){
-                    if(arguments[0].readyState==0){} else {
+                    if(arguments[0].readyState === 0){} else {
                         console.error(arguments[2].toString());
                     }
                 });
@@ -438,7 +442,6 @@
 			}
 
 		// Initialize.
-
 			// Hide main, articles.
 				$main.hide();
 				$main_articles.hide();
@@ -450,11 +453,28 @@
 						$main._show(location.hash.substr(1), true);
 					});
 
+
+    showArticle = function (articleId) {
+        if (projectIds.includes(articleId)) {
+            $.ajax({
+                data: {"template": 'project_' + articleId, "ajax": true},
+                success: function (response) {
+                    $('#main').append(response);
+                    $main._refreshMain();
+                    $('article').hide();
+                    $('article').removeClass('active');
+                    $('#' + articleId).show();
+                    $('#' + articleId).addClass('active');
+                }
+            })
+        } else {
+            $('article').hide();
+            $('article').removeClass('active');
+            $('#' + articleId).show();
+            $('#' + articleId).addClass('active');
+        }
+
+    }
+
 })(jQuery);
 
-function showArticle(articleId) {
-    $('article').hide();
-    $('article').removeClass('active');
-    $('#' + articleId).show();
-    $('#' + articleId).addClass('active');
-}

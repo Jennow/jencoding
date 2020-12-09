@@ -48,3 +48,4 @@ vart=V-Art
 puzzl3d=Puzzl3D
 blackout=Blackout
 blue_rizon=Blue Rizon
+meta_description=Jenifer Prochnow - Professionelle Web- und Appentwicklung.
