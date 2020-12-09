@@ -4,11 +4,10 @@ include_once 'Translator.php';
 include_once 'TemplateParser.php';
 
 $parser = new TemplateParser('template.html');
-$parser->setVariable('rootUrl', 'http://localhost/jencoding');
-$parser->setVariable('contactMail', 'jeniferprochnow@web.de');
+$parser->setVariable('rootUrl', 'https://jencoding.com');
+$parser->setVariable('contactMail', 'moin@jencoding.com');
 
 echo $parser->parseTemplate();
-
 
 // TODO: Add Projects
 // TODO: Add own contentpage for each project

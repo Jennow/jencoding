@@ -14,7 +14,10 @@
 		$main = $('#main'),
 		$main_articles = $main.children('article'),
         projectIds = [
-        'blue_rizon'
+            'blue_rizon',
+            'blackout',
+            'puzzl3d',
+            'vart'
         ]
 
 	// Breakpoints.

@@ -6,9 +6,80 @@ const buttons = {
 };
 const cardsContainer = document.querySelector(".cards-wrapper");
 const cardInfosContainer = document.querySelector(".info-wrapper");
+var page = 0;
 
-buttons.next.addEventListener("click", () => swapCards("right"));
-buttons.prev.addEventListener("click", () => swapCards("left"));
+$(document).ready(function() {
+   $.ajax({
+       url: ROOT_URL + '/data/projects.json',
+       success: function(data) {
+           console.log(data)
+           let dataSize = data.length;
+
+           loadCards(0, data)
+           buttons.next.addEventListener("click", function () {
+               loadCards(page, data);
+               page++;
+               if (page > dataSize - 1) {
+                   page = 0;
+               }
+               swapCards("right")
+           });
+           buttons.prev.addEventListener("click", function (){
+               loadCards(page, data);
+               page--;
+               if (page < 0) {
+                   page = dataSize - 1;
+               }
+               swapCards("left")
+           });
+       }
+   })
+});
+
+function loadCards(cardId, data, direction) {
+    let dataSize = data.length;
+    let previousCardId = cardId - 1;
+    let nextCardId     = cardId + 1;
+    if (previousCardId < 0) {
+        previousCardId = dataSize - 1;
+    }
+    if (nextCardId > dataSize - 1) {
+        nextCardId = 0;
+    }
+
+    let prev    = data[previousCardId];
+    let next    = data[nextCardId];
+    let current = data[cardId];
+
+    $('.previous-card .card-image').css('background-image', 'url(' + ROOT_URL + '/images/' + prev.logo + ')');
+    $('.next-card .card-image').css('background-image', 'url(' +  ROOT_URL + '/images/' + next.logo + ')');
+    $('.current-card .card-image').css('background-image', 'url(' +  ROOT_URL + '/images/' + current.logo + ')');
+
+    $('.previous-info .name').html(prev.name);
+    $('.next-info .name').html(next.name);
+    $('.current-info .name').html(current.name);
+
+    $('.previous-info button').off('click');
+    $('.next-info button').off('click');
+    $('.current-info button').off('click');
+
+    $('.previous-info button').on('click', () => showArticle(prev.identifier));
+    $('.next-info button').on('click', () => showArticle(next.identifier));
+    $('.current-info button').on('click', () => showArticle(current.identifier));
+
+    if (LANG === 'de') {
+        $('.previous-info .description').html(prev.description_de);
+        $('.next-info .description').html(next.description_de);
+        $('.current-info .description').html(current.description_de);
+    } else {
+        $('.previous-info .description').html(prev.description_en);
+        $('.next-info .description').html(next.description_en);
+        $('.current-info .description').html(current.description_en);
+    }
+
+
+}
+
 
 function swapCards(direction) {
     const currentCart    = cardsContainer.querySelector(".current-card");

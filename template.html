@@ -4,7 +4,7 @@
   <title>jencoding</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="{{rootUrl}}/assets/css/main.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
@@ -42,6 +42,9 @@
     <!-- INCLUDE inc_elements.html -->
     <!-- INCLUDE inc_info.html -->
     <!-- INCLUDE projects/inc_project_blue_rizon.html -->
+    <!-- INCLUDE projects/inc_project_puzzl3d.html -->
+    <!-- INCLUDE projects/inc_project_blackout.html -->
+    <!-- INCLUDE projects/inc_project_vart.html -->
   </div>
 
   <!-- Footer -->
@@ -73,12 +76,18 @@
 <script src="assets/js/work_slider.js"></script>
 
 <script>
+    const ROOT_URL = '{{rootUrl}}';
+    const LANG     = '{{lang}}';
+
+
     $(document).ready(function() {
         $('#contact form').on('submit', function (e) {
             e.preventDefault();
+  
             $.ajax({
                 url: "contact_form.php",
-                context: document.body
+                data: $("#contact form").serialize(),
+                type: 'POST',
             }).done(function(response) {
                 response = JSON.parse(response);
                 if (response.success) {

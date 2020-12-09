@@ -9,11 +9,14 @@ class TemplateParser {
 
     public function __construct($templateFile) {
         $this->content     = file_get_contents($templateFile);
-        $lang              = $_GET['lang'];
         $acceptLang        = ['de', 'en'];
-        $this->lang        = in_array($lang, $acceptLang) ? $lang : 'en';
+        
+        $lang              = $_GET['lang'] ?: substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        $lang = in_array($lang, $acceptLang) ? $lang : 'en';
+        $this->lang        = $lang;
         $langSwitch        = array_values(array_diff($acceptLang, [$this->lang]))[0] ?: 'de';
         $this->setVariable('langswitch', $langSwitch);
+        $this->setVariable('lang', $lang);
     }
 
     public function parseTemplate() {

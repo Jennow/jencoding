@@ -1,0 +1,12 @@
+{
+    "name": "u98493983/jencoding",
+    "require": {
+        "phpmailer/phpmailer": "^6.2"
+    },
+    "authors": [
+        {
+            "name": "Jenifer Prochnow",
+            "email": "jeniferprochnow@web.de"
+        }
+    ]
+}

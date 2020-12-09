@@ -1,13 +1,29 @@
 <?php
-if(!empty($_POST['message']) && !empty($_POST['name']&& !empty($_POST['email']))) {
-    $to      = 'jeniferprochnow@web.de';
-    $subject = 'jencoding.com Kontakt von ' . $_POST['name'];
-    $message = 'Nachricht von ' . $_POST['name'] . ': ' . $_POST['message'];
-    $headers = 'From: ' - $_POST['email'] . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-    $success = mail($to, $subject, $message, $headers);
-    echo json_encode(['succsess' => $success]);
+require 'vendor/autoload.php';
+
+if(!empty($_POST['message']) && !empty($_POST['name']&& !empty($_POST['email']))) {
+
+  $mail = new PHPMailer(true);
+  $mail->CharSet = "UTF-8";
+
+  try {
+    $mail->setFrom($_POST['email'], 'Jencoding Kontaktformular');
+    $mail->addAddress('moin@jencoding.com');
+
+    $mail->Subject = 'jencoding.com Kontakt von ' . $_POST['name'];
+    $mail->Body    = 'Nachricht von ' . $_POST['name'] . ': ' . $_POST['message'];
+    $success       = $mail->send();
+    echo json_encode(['success' => true]);
     exit;
+  } catch (Exception $e) {
+    echo json_encode(['success' => false]);
+    exit;
+  }
 }
-echo json_encode(['succsess' => false]);
+
+echo json_encode(['success' => false]);
 exit;
