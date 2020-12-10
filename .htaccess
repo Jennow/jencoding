@@ -1,8 +1,15 @@
 RewriteEngine On
-RewriteCond %{SERVER_PORT} !=443
-RewriteRule ^(.*)$ https://www.jencoding.com/$1 [R=301,L]
+
+# Remove Slash
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{THE_REQUEST} \s/+(.+?)/+[?\s]
+RewriteRule /$ /%1 [R=302,NE,L]
+
+# generate rewrite base dynamically
+RewriteCond %{REQUEST_URI}::$1 ^(.*?/)(.*)::\2$
+RewriteRule ^(.*)$ - [E=BASE:%1]
 
 # Pipe request to controller
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(en|de)/?$ index.php?lang=$1 [QSA,NC,L]
+RewriteRule ^(en|de)(.*)?$ $2?lang=$1 [QSA,NC,L]
